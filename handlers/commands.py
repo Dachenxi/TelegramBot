@@ -39,7 +39,31 @@ async def stiker_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text(f"❌ Terjadi kesalahan: {e}")
 
+from datetime import datetime
+
+async def uptime_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """
+    Handler untuk command /uptime.
+    """
+    bot_start_time = context.bot_data.get("start_time")
+    if not bot_start_time:
+        await update.message.reply_text("❌ Waktu mulai bot tidak tersedia.")
+        return
+
+    # Hitung uptime
+    current_time = datetime.now()
+    uptime_duration = current_time - bot_start_time
+    hours, remainder = divmod(uptime_duration.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    uptime_text = (
+        f"🕒 Bot aktif sejak: {bot_start_time.strftime('%Y-%m-%d %H:%M:%S')}\n"
+        f"⏳ Uptime: {uptime_duration.days} hari, {hours} jam, {minutes} menit, {seconds} detik"
+    )
+    await update.message.reply_text(uptime_text)
+
 def register_command_handlers(application: Application):
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("stiker", stiker_command)) 
+    application.add_handler(CommandHandler("stiker", stiker_command))
+    application.add_handler(CommandHandler("uptime", uptime_command))
