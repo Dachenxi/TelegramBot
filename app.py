@@ -16,6 +16,6 @@ class InstagramDownloaderBot:
         self.application.run_polling()
 
 if __name__ == "__main__":
-    BOT_TOKEN = "8177974294:AAG0DNuP-lnhmfYgrHwQU8zJ6nm1zz_oxlA"
+    BOT_TOKEN = ""
     bot = InstagramDownloaderBot(BOT_TOKEN)
     bot.run()
