@@ -2,6 +2,7 @@ from telegram.ext import Application
 from handlers.commands import register_command_handlers
 from handlers.messages import register_message_handlers
 from datetime import datetime
+from utils.file_utils import get_token
 
 class Bot:
     def __init__(self, token: str):
@@ -19,6 +20,5 @@ class Bot:
         self.application.run_polling()
 
 if __name__ == "__main__":
-    BOT_TOKEN = ""
-    bot = Bot(BOT_TOKEN)
+    bot = Bot(get_token())
     bot.run()
