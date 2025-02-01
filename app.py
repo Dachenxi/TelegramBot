@@ -20,5 +20,5 @@ class Bot:
         self.application.run_polling()
 
 if __name__ == "__main__":
-    bot = Bot(get_token())
+    bot = Bot(get_token())   
     bot.run()
