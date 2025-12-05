@@ -5,65 +5,69 @@ import asyncio
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Halo! Saya adalah bot download Instagram.\n"
-        "Kirimkan saya link post Instagram dan saya akan mendownloadnya untuk Anda."
-    )
-
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("""
-Cara menggunakan bot:
-1. Kirim link post Instagram
-2. Tunggu beberapa saat
-3. Bot akan mengirimkan media dari post tersebut
-""")
-
-async def stiker_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Handler untuk perintah /stiker.
-    Menggunakan API untuk menghasilkan stiker dengan teks.
-    """
-    if not context.args:
+        "🎉 **Selamat datang di Multi-Platform Media Downloader Bot!** 🎉\n\n"
+        "🌟 Bot ini mendukung download dari berbagai platform:\n"
+        "🎥 YouTube\n"
+        "📸 Instagram\n"
+        "👥 Facebook\n"
+        "🐦 Twitter/X\n"
+        "🎵 TikTok\n"
+        "🤖 Reddit\n"
+        "📹 Vimeo\n"
+        "🎮 Twitch\n"
+        "📌 Pinterest\n"
+        "📝 Tumblr\n"
+        "🎬 Dailymotion\n"
+        "🎧 SoundCloud\n\n"
+        "📌 **Cara Menggunakan:**\n"
+        "Cukup kirimkan link video/foto dari platform yang didukung!\n\n"
+        "💡 Gunakan /help untuk info lebih lanjut.",
+        parse_mode='Markdown'
         await update.message.reply_text("❌ Anda harus memberikan teks setelah perintah /stiker. Contoh: /stiker HALO ASU")
         return
     
     text = " ".join(context.args)  # Gabungkan teks setelah /stiker
-    try:
-        sticker_path = generate_sticker(text)
-        if sticker_path:
-            with open(sticker_path, "rb") as sticker_file:
-                await update.message.reply_document(document=sticker_file)
-        else:
-            await update.message.reply_text("❌ Gagal membuat stiker. Coba lagi nanti.")
-    except error.NetworkError as e: 
-        await asyncio.sleep(2)
-    except Exception as e:
-        await update.message.reply_text(f"❌ Terjadi kesalahan: {e}")
+🤖 **PANDUAN PENGGUNAAN BOT**
 
-from datetime import datetime
+📝 **Cara Menggunakan:**
+1️⃣ Kirim link video/foto dari platform yang didukung
+2️⃣ Bot akan mendeteksi platform secara otomatis
+3️⃣ Tunggu proses download selesai
+4️⃣ Bot akan mengirimkan media beserta informasinya
 
-async def uptime_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Handler untuk command /uptime.
-    """
-    bot_start_time = context.bot_data.get("start_time")
-    if not bot_start_time:
-        await update.message.reply_text("❌ Waktu mulai bot tidak tersedia.")
-        return
+✨ **Fitur:**
+• ✅ Auto-detect platform dari URL
+• ✅ Informasi lengkap (judul, uploader, durasi, views, likes)
+• ✅ Caption menarik dengan emoji
+• ✅ Support video dan foto
+• ✅ Auto-cleanup setelah kirim
+• ✅ Support multiple files
 
-    # Hitung uptime
-    current_time = datetime.now()
-    uptime_duration = current_time - bot_start_time
-    hours, remainder = divmod(uptime_duration.seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
+🌐 **Platform yang Didukung:**
+🎥 YouTube (video & shorts)
+📸 Instagram (post, reels, stories)
+👥 Facebook (video & watch)
+🐦 Twitter/X
+🎵 TikTok
+🤖 Reddit
+📹 Vimeo
+🎮 Twitch (clips & VOD)
+📌 Pinterest
+📝 Tumblr
+🎬 Dailymotion
+🎧 SoundCloud
 
-    uptime_text = (
-        f"🕒 Bot aktif sejak: {bot_start_time.strftime('%Y-%m-%d %H:%M:%S')}\n"
-        f"⏳ Uptime: {uptime_duration.days} hari, {hours} jam, {minutes} menit, {seconds} detik"
-    )
-    await update.message.reply_text(uptime_text)
+⚠️ **Catatan:**
+• Beberapa platform mungkin memiliki batasan
+• Pastikan link bisa diakses secara publik
+• File besar akan dikirim sebagai document
 
-def register_command_handlers(application: Application):
-    application.add_handler(CommandHandler("start", start_command))
-    application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("stiker", stiker_command))
-    application.add_handler(CommandHandler("uptime", uptime_command))
+🔧 **Command Lain:**
+/start - Mulai bot
+/help - Tampilkan bantuan ini
+/stiker <teks> - Buat stiker dengan teks
+/uptime - Cek uptime bot
+
+❓ **Butuh bantuan?**
+Pastikan link yang dikirim valid dan bisa diakses!
+""", parse_mode='Markdown')

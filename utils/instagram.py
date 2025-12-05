@@ -2,7 +2,7 @@ import instaloader
 from urllib.parse import urlparse
 import os, re
 
-def extract_shortcode(url: str) -> str:
+def extract_shortcode(url: str):
     path = urlparse(url).path
     patterns = [r"/p/([^/?]+)", r"/reel/([^/?]+)", r"/reels/([^/?]+)"]
     for pattern in patterns:
